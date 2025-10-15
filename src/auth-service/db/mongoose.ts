@@ -1,16 +1,21 @@
 import mongoose from "mongoose";
 import { AUTH_MONGO_URI, AUTH_DB_NAME } from "../../common/config/env.js";
 
-let ready = false;
+export async function connectAuthDb(): Promise<void> {
+  // 0 = disconnected, 1 = connected, 2 = connecting, 3 = disconnecting
+  if (mongoose.connection.readyState === 1) return;           // already connected
+  if (mongoose.connection.readyState === 2) {                 // connecting: wait
+    await new Promise<void>((resolve, reject) => {
+      mongoose.connection.once("connected", () => resolve());
+      mongoose.connection.once("error", (e) => reject(e));
+    });
+    return;
+  }
 
-export async function connectAuthDb() {
-  if (ready) return;
   await mongoose.connect(AUTH_MONGO_URI, { dbName: AUTH_DB_NAME });
-  ready = true;
   console.log(`✅ Mongoose connected (auth): ${AUTH_DB_NAME}`);
 }
 
 export function authConnection() {
-  if (!ready) throw new Error("Auth mongoose not connected");
-  return mongoose.connection;
+  return mongoose.connection; // no “not connected” throw here anymore
 }
