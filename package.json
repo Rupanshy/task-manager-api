@@ -14,10 +14,10 @@
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^6.0.0",
-    "dotenv": "^16.5.0",
+    "dotenv": "^16.6.1",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
-    "mongodb": "^6.9.0",
+    "mongodb": "^6.20.0",
     "morgan": "^1.10.1",
     "zod": "^4.1.12"
   },
@@ -25,6 +25,8 @@
     "@types/bcrypt": "^5.0.2",
     "@types/express": "^5.0.3",
     "@types/jsonwebtoken": "^9.0.9",
+    "@types/mongodb": "^4.0.7",
+    "@types/morgan": "^1.9.10",
     "@types/node": "^24.7.2",
     "eslint": "^9.37.0",
     "prettier": "^3.6.2",
