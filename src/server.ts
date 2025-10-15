@@ -1,7 +1,7 @@
 import app from "./app.js";
 import { PORT } from "./common/config/env.js";
-import { connectAuthDb } from "./auth-service/db/mongo.js";
-import { connectTaskDb } from "./task-service/db/mongo.js";
+import { connectAuthDb } from "./auth-service/db/mongoose.js";
+import { connectTaskDb } from "./task-service/db/mongoose.js";
 
 try {
   await Promise.all([connectAuthDb(), connectTaskDb()]);
