@@ -1,0 +1,46 @@
+# ------------------------------------------------------
+# Node.js / TypeScript Backend .gitignore
+# ------------------------------------------------------
+
+# Node dependencies
+node_modules/
+npm-debug.log*
+
+# Build output
+dist/
+build/
+coverage/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Environment variables (keep secrets safe!)
+.env
+.env.*
+!.env.example   # Allow example env templates
+
+# OS / Editor junk
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+*.log.*
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# ------------------------------------------------------
+# Custom Project Rules
+# ------------------------------------------------------
+
+# Ignore local database dumps or debug data
+*.dump
+*.bak
+*.sqlite
+
+# Ignore compiled swagger docs or generated SDKs
+generated/
+docs/
