@@ -1,0 +1,11 @@
+{
+  "name": "task-service",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "dist/app.js",
+  "scripts": {
+    "dev": "NODE_OPTIONS='--loader ts-node/esm' ts-node-esm src/app.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/app.js"
+  }
+}
