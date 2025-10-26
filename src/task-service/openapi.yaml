@@ -50,8 +50,6 @@ components:
       type: object
       required: [name, key]
       properties:
-        id:
-          type: string
         key:
           type: string
           example: TM
@@ -59,8 +57,6 @@ components:
           type: string
           example: Task Manager
         description:
-          type: string
-        ownerId:
           type: string
         members:
           type: array
@@ -189,6 +185,7 @@ paths:
     post:
       tags: [Projects]
       summary: Create project
+      security: [{ bearerAuth: [] }]
       requestBody:
         required: true
         content:
@@ -207,6 +204,7 @@ paths:
     get:
       tags: [Projects]
       summary: Get project details
+      security: [{ bearerAuth: [] }]
       parameters:
         - name: projectId
           in: path
@@ -222,6 +220,7 @@ paths:
     patch:
       tags: [Projects]
       summary: Update project
+      security: [{ bearerAuth: [] }]
       requestBody:
         content:
           application/json:
@@ -233,6 +232,7 @@ paths:
     delete:
       tags: [Projects]
       summary: Delete project
+      security: [{ bearerAuth: [] }]
       responses:
         "204":
           description: No Content
@@ -241,6 +241,7 @@ paths:
     get:
       tags: [Tasks]
       summary: List tasks in a project
+      security: [{ bearerAuth: [] }]
       parameters:
         - name: projectId
           in: path
@@ -274,6 +275,7 @@ paths:
     post:
       tags: [Tasks]
       summary: Create task
+      security: [{ bearerAuth: [] }]
       requestBody:
         required: true
         content:
@@ -292,6 +294,7 @@ paths:
     get:
       tags: [Tasks]
       summary: Get task details
+      security: [{ bearerAuth: [] }]
       parameters:
         - name: taskId
           in: path
@@ -307,6 +310,7 @@ paths:
     patch:
       tags: [Tasks]
       summary: Update task
+      security: [{ bearerAuth: [] }]
       requestBody:
         content:
           application/json:
@@ -326,6 +330,7 @@ paths:
     get:
       tags: [Comments]
       summary: List comments
+      security: [{ bearerAuth: [] }]
       parameters:
         - name: taskId
           in: path
@@ -341,6 +346,7 @@ paths:
     post:
       tags: [Comments]
       summary: Add comment
+      security: [{ bearerAuth: [] }]
       requestBody:
         required: true
         content:
@@ -359,6 +365,7 @@ paths:
     get:
       tags: [Sprints]
       summary: List sprints for a project
+      security: [{ bearerAuth: [] }]
       parameters:
         - name: projectId
           in: path
@@ -374,6 +381,7 @@ paths:
     post:
       tags: [Sprints]
       summary: Create sprint
+      security: [{ bearerAuth: [] }]
       requestBody:
         required: true
         content:
