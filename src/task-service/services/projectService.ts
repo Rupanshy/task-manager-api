@@ -1,10 +1,13 @@
+
 import { ProjectModel } from "../models/projectModel.js";
 import type { ProjectDoc } from "../models/projectModel.js";
 
 /**
  * Create a new project.
  */
+
 export async function createProject(data: Partial<ProjectDoc>) {
+  console.log("I am inside createProject method");
   const project = await ProjectModel.create(data);
   return project.toObject();
 }
@@ -12,6 +15,7 @@ export async function createProject(data: Partial<ProjectDoc>) {
 /**
  * List all projects owned by or shared with the user.
  */
+
 export async function listProjects(userId: string, page = 1, limit = 10) {
   const filter = { $or: [{ ownerId: userId }, { members: userId }] };
   const skip = (page - 1) * limit;
@@ -32,6 +36,7 @@ export async function listProjects(userId: string, page = 1, limit = 10) {
 /**
  * Find a project by ID, if the user is owner or member.
  */
+
 export async function getProjectById(projectId: string, userId: string) {
   const project = await ProjectModel.findById(projectId).lean();
   if (!project) return null;
@@ -45,6 +50,7 @@ export async function getProjectById(projectId: string, userId: string) {
 /**
  * Update project if the user is owner.
  */
+
 export async function updateProject(projectId: string, userId: string, updates: Partial<ProjectDoc>) {
   const project = await ProjectModel.findById(projectId);
   if (!project) return null;
@@ -59,6 +65,7 @@ export async function updateProject(projectId: string, userId: string, updates: 
 /**
  * Delete project if the user is owner.
  */
+
 export async function deleteProject(projectId: string, userId: string) {
   const project = await ProjectModel.findById(projectId);
   if (!project) return null;
@@ -68,3 +75,5 @@ export async function deleteProject(projectId: string, userId: string) {
   await project.deleteOne();
   return true;
 }
+
+ 

@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
-import { AUTH_MONGO_URI, AUTH_DB_NAME } from "../../common/config/env.js";
+import { AUTH_MONGO_URI, AUTH_DB_NAME, JWT_SECRET } from "../../common/config/env.js";
 
 export async function connectAuthDb(): Promise<void> {
+  console.log('[AUTH-SERVICE JWT_SECRET]', JWT_SECRET);
   // 0 = disconnected, 1 = connected, 2 = connecting, 3 = disconnecting
   if (mongoose.connection.readyState === 1) return;           // already connected
   if (mongoose.connection.readyState === 2) {                 // connecting: wait

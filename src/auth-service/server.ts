@@ -4,6 +4,9 @@ import morgan from "morgan";
 import { connectAuthDb } from "./db/mongoose.js";      // auth DB connector
 import { AUTHPORT } from "../common/config/env.js";            // shared config (.env)
 import { authRouter } from "./routes/authRoute.js";   // your existing auth routes
+import { JWT_SECRET } from "../common/config/env.js";
+
+console.log("Auth Service Jwt ", JWT_SECRET); 
 
 const app = express();
 app.use(express.json());

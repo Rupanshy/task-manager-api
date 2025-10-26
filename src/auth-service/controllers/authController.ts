@@ -48,13 +48,21 @@ export async function me(req: Request, res: Response): Promise<void> {
 }
 
 // auth middleware (keep it in controller file or move to /middlewares)
-export function requireAuth(req: Request, res: Response, next: Function): void {
-  const auth = req.headers.authorization || "";
-  const token = auth.startsWith("Bearer ") ? auth.slice(7) : "";
-  if (!token) { res.status(401).json({ error: "UNAUTHENTICATED" }); return; }
+export function requireAuth(req: Request, res: Response, next: Function) {
+  const auth = req.headers.authorization || '';
+  if (!auth.startsWith('Bearer ')) {
+    return res.status(401).json({ error: 'UNAUTHENTICATED' })
+  };
+
+  const token = auth.slice(7).trim();              // <- important
+  if (!token) return res.status(401).json({ error: 'UNAUTHENTICATED' });
+
   try {
     const { sub, role } = verifyAccessToken(token);
     (req as any).user = { id: sub, role };
-    (next as any)();
-  } catch { res.status(401).json({ error: "UNAUTHENTICATED" }); }
+    next();
+  } catch (e: any) {
+    console.error('requireAuth:', e?.name, e?.message);
+    res.status(401).json({ error: 'UNAUTHENTICATED' });
+  }
 }

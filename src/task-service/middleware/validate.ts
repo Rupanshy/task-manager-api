@@ -1,19 +1,21 @@
-import { ZodObject, ZodError } from "zod";
-import { Request, Response, NextFunction } from "express";
+import { z } from 'zod';
+import { RequestHandler } from 'express';
 
-export const validate = (schema: ZodObject, target: "body" | "query" | "params" = "body") => {
-  return (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const parsed = schema.parse(req[target]);
-      (req as any)[target] = parsed; // replace with validated data
-      next();
-    } catch (err) {
-      const zodError = err as ZodError;
-      return res.status(400).json({
-        error: "VALIDATION_ERROR",
-        message: "Invalid input",
-        details: zodError.flatten(),
+export const validate = <T extends z.ZodTypeAny>(
+  schema: T,
+  target: 'body' | 'query' | 'params' = 'body'
+): RequestHandler => {
+  return (req, res, next) => {
+    const result = schema.safeParse((req as any)[target]);
+    if (!result.success) {
+      res.status(400).json({
+        error: 'VALIDATION_ERROR',
+        message: 'Invalid input',
+        details: result.error.flatten(),
       });
+      return;
     }
+    (req as any)[target] = result.data;
+    next();
   };
 };

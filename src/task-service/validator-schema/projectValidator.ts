@@ -1,3 +1,4 @@
+
 import { z } from "zod";
 
 export const projectSchemas = {
@@ -20,3 +21,5 @@ export const projectSchemas = {
     limit: z.coerce.number().min(1).max(100).default(10),
   }),
 };
+
+
