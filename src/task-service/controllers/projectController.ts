@@ -20,9 +20,11 @@ export async function createProject(req: Request, res: Response) {
  */
 export async function listProjects(req: Request, res: Response) {
   try {
-    const userId = (req as any).user.id;
-    const { page = 1, limit = 10 } = req.query as any;
-    const result = await projectService.listProjects(userId, Number(page), Number(limit));
+    const ownerId = (req as any).user.id;
+    const { page, limit } = (res.locals.validated?.query ?? { page: 1, limit: 10 }) as {
+    page: number; limit: number;
+  };
+    const result = await projectService.listProjects(ownerId, Number(page), Number(limit));
     res.json(result);
   } catch (err) {
     console.error("listProjects:", err);
