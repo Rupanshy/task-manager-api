@@ -5,6 +5,7 @@ import { connectTaskDb } from "./db/mongoose.js";
 import { PORT } from "../common/config/env.js"; // or "../common/config/env.js"
 import { mountSwagger } from "./swagger.js";
 import projectRouter from "./routes/projectRoute.js";
+import { taskRouter } from "./routes/taskRouter.js";
 import { requireAuth } from "./middleware/auth.js"
 import { JWT_SECRET } from "../common/config/env.js";
 
@@ -23,6 +24,7 @@ mountSwagger(api);                 // -> /api/task/docs
 app.use("/api/task", api);
 
 app.use("/api/projects", projectRouter);
+app.use("/api/tasks", taskRouter);
 
 // --- Health
 app.get("/health", (_req, res) => res.json({ status: "ok" }));

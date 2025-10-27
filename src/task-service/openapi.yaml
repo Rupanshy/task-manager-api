@@ -77,8 +77,6 @@ components:
       type: object
       required: [title, projectId]
       properties:
-        id:
-          type: string
         projectId:
           type: string
         title:
@@ -111,12 +109,6 @@ components:
           format: date-time
         estimate:
           type: number
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
 
     Comment:
       type: object
@@ -251,7 +243,7 @@ paths:
         "204":
           description: No Content
 
-  /projects/{projectId}/tasks:
+  /tasks:
     get:
       tags: [Tasks]
       summary: List tasks in a project
