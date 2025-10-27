@@ -9,3 +9,4 @@ export const taskRouter = Router();
 taskRouter
   .route("/")
   .post(requireAuth, validate(taskSchemas.create, "body"), controller.createTask)
+  .get(requireAuth, validate(taskSchemas.query, "query"), controller.listTasks);
