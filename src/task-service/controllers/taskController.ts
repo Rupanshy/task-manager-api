@@ -54,3 +54,16 @@ export async function updateTask(req: Request, res: Response) {
     return res.status(500).json({ error: "INTERNAL_ERROR", message: "Failed to update task" });
   }
 }
+
+// DELETE /api/tasks/:taskId
+export async function deleteTask(req: Request, res: Response) {
+  try {
+    const ownerId = (req as any).user.id;
+    const ok = await taskService.deleteTask(ownerId, req.params.taskId);
+    if (!ok) return res.status(404).json({ error: "NOT_FOUND" });
+    return res.status(204).send();
+  } catch (err) {
+    console.error("deleteTask:", err);
+    return res.status(500).json({ error: "INTERNAL_ERROR", message: "Failed to delete task" });
+  }
+}

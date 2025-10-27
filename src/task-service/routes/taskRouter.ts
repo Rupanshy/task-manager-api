@@ -15,3 +15,4 @@ taskRouter
   .route("/:taskId")
   .get(requireAuth, controller.getTask)
   .patch(requireAuth, validate(taskSchemas.update, "body"), controller.updateTask)
+  .delete(requireAuth, controller.deleteTask);

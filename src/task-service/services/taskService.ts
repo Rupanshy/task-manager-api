@@ -55,3 +55,8 @@ export async function updateTask(ownerId: string, id: string, patch: any) {
   );
   return doc?.toJSON() ?? null;
 }
+
+export async function deleteTask(ownerId: string, id: string) {
+  const res = await TaskModel.deleteOne({ _id: id, ownerId });
+  return res.deletedCount === 1;
+}
