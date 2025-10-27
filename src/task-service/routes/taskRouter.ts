@@ -10,3 +10,8 @@ taskRouter
   .route("/")
   .post(requireAuth, validate(taskSchemas.create, "body"), controller.createTask)
   .get(requireAuth, validate(taskSchemas.query, "query"), controller.listTasks);
+
+  taskRouter
+  .route("/:taskId")
+  .get(requireAuth, controller.getTask)
+  .patch(requireAuth, validate(taskSchemas.update, "body"), controller.updateTask)

@@ -41,3 +41,17 @@ export async function listTasks(ownerId: string, q: {
 
   return { page, limit, total, data };
 }
+
+export async function getTask(ownerId: string, id: string) {
+  const doc = await TaskModel.findOne({ _id: id, ownerId }).lean();
+  return doc; // may be null
+}
+
+export async function updateTask(ownerId: string, id: string, patch: any) {
+  const doc = await TaskModel.findOneAndUpdate(
+    { _id: id, ownerId },
+    { $set: patch },
+    { new: true }
+  );
+  return doc?.toJSON() ?? null;
+}

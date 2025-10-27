@@ -317,6 +317,11 @@ paths:
       tags: [Tasks]
       summary: Update task
       security: [{ bearerAuth: [] }]
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          schema: { type: string }
       requestBody:
         content:
           application/json:
@@ -328,6 +333,11 @@ paths:
     delete:
       tags: [Tasks]
       summary: Delete task
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          schema: { type: string }
       responses:
         "204":
           description: No Content
