@@ -14,12 +14,12 @@ projectRouter
   .get(validate(projectSchemas.query, "query"), controller.listProjects)
   .post(validate(projectSchemas.create, "body"), controller.createProject);
 
-  /*
+
 projectRouter
   .route("/:projectId")
   .get(controller.getProject)
   .patch(validate(projectSchemas.update, "body"), controller.updateProject)
   .delete(controller.deleteProject);
-*/
+
 export default projectRouter;
 

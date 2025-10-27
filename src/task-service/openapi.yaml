@@ -46,7 +46,7 @@ components:
           type: integer
           example: 13
 
-    Project:
+    ProjectBase:
       type: object
       required: [name, key]
       properties:
@@ -62,12 +62,16 @@ components:
           type: array
           items:
             type: string
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
+
+    ProjectResponse:
+      allOf:
+        - $ref: "#/components/schemas/ProjectBase"
+        - type: object
+          properties:
+            id:         { type: string, readOnly: true }
+            createdAt:  { type: string, format: date-time, readOnly: true }
+            updatedAt:  { type: string, format: date-time, readOnly: true }
+      required: [key, name]
 
     Task:
       type: object
@@ -191,14 +195,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Project"
+              $ref: "#/components/schemas/ProjectBase"
       responses:
         "201":
           description: Created
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Project"
+                $ref: "#/components/schemas/ProjectResponse"
 
   /projects/{projectId}:
     get:
@@ -221,11 +225,16 @@ paths:
       tags: [Projects]
       summary: Update project
       security: [{ bearerAuth: [] }]
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema: { type: string }
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Project"
+              $ref: "#/components/schemas/ProjectBase"
       responses:
         "200":
           description: OK
@@ -233,6 +242,11 @@ paths:
       tags: [Projects]
       summary: Delete project
       security: [{ bearerAuth: [] }]
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema: { type: string }
       responses:
         "204":
           description: No Content
