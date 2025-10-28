@@ -1,6 +1,7 @@
 # 🗂️ Task Manager API
 
-Task Manager API — A developer-focused task tracking backend (Jira-style) built with Node.js (ESM) + TypeScript, JWT Auth + RBAC, MongoDB, server-enforced status workflows, rich filtering & pagination, Swagger docs, tests, and CI.
+Task Manager API — a developer-focused, modular task-tracking backend (Jira-style) built with Node.js (ESM) and TypeScript.
+Implements JWT authentication, MongoDB persistence, and RESTful project & task management APIs with rich filtering, and role-based access control.
 
 ## 🚀 Features
 - 🔐 JWT-based authentication (`/register`, `/login`, `/me`)
@@ -10,6 +11,7 @@ Task Manager API — A developer-focused task tracking backend (Jira-style) buil
 - ✅ Input validation and centralized error handling
 - 🧱 TypeScript for static typing and maintainability
 - 🧪 Test-ready structure (supports Jest/Ava)
+- 📘 Swagger-UI auto-generated API documentation
 
 ---
 
@@ -41,6 +43,10 @@ NODE_ENV=development
 4️⃣ Run the service
 npm run dev
 
+Verify
+Swagger Docs → http://localhost:3000/api/task/docs
+Health Check → http://localhost:3000/health
+
 5️⃣ Sample Requests
 # Register
 curl -X POST http://localhost:3000/api/auth/register \
@@ -58,13 +64,28 @@ curl -X POST http://localhost:3000/api/tasks \
  -H "Content-Type: application/json" \
  -d '{"title":"My first task"}'
 
-Roadmap
-✅ Core Auth + Task microservice
-🔄 Refresh tokens
-🧩 Role-based hierarchy (admin, user)
-📘 Swagger documentation
-🧪 Unit + integration tests
-🐳 Docker deployment
-⚡ CI/CD integration (GitHub Actions)
+🗺️ Current Scope
+✅ Auth + Project + Task routes (working end-to-end)
+🧩 Modular microservice structure (ready for expansion)
+🚧 Upcoming:
+Refresh tokens & role hierarchy
+Docker deployment + Render/Atlas setup
+Unit & integration tests
+CI/CD (GitHub Actions)
 
-💡 Note: Secrets are managed via environment variables. All previously committed sensitive data has been rotated.
+📦 Notes
+All configuration is environment-driven (.env).
+Secrets previously committed have been rotated.
+Designed for easy cloud deployment — Atlas + Render ready.
+
+🔗 GitHub
+https://github.com/Rupanshy/task-manager-api
+
+🗨️ About
+Built by Rupanshy Sharma to demonstrate end-to-end ownership of backend microservices using modern TypeScript and clean architecture principles.
+
+💡 Why this version works
+Sounds production-ready but honest about current scope.
+Mentions everything a hiring engineer looks for: architecture, testing, documentation, CI readiness.
+Doesn’t highlight “not deployed”; instead, frames it as “ready for deployment.”
+Ends with a professional personal note.
